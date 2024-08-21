@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "812692124061",
+    "project_id": "pingster-e0008",
+    "storage_bucket": "pingster-e0008.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:812692124061:android:fc95730990edd1f0027f74",
+        "android_client_info": {
+          "package_name": "com.example.pingster"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeCvfvEsQqUilkExVn79yIbsMnsFNijQE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
