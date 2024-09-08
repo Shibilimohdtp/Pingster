@@ -8,6 +8,8 @@ class Chat {
   final Map<String, int> unreadCount;
   String? otherUserName;
   String? otherUserProfilePicture;
+  String? folder;
+  String? theme;
 
   Chat({
     required this.id,
@@ -17,6 +19,8 @@ class Chat {
     required this.unreadCount,
     this.otherUserName,
     this.otherUserProfilePicture,
+    this.folder,
+    this.theme,
   });
 
   factory Chat.fromFirestore(DocumentSnapshot doc) {
@@ -27,6 +31,8 @@ class Chat {
       lastMessage: data['lastMessage'] ?? '',
       lastMessageTime: (data['lastMessageTime'] as Timestamp).toDate(),
       unreadCount: Map<String, int>.from(data['unreadCount'] ?? {}),
+      folder: data['folder'],
+      theme: data['theme'],
     );
   }
 
@@ -36,22 +42,33 @@ class Chat {
       'lastMessage': lastMessage,
       'lastMessageTime': FieldValue.serverTimestamp(),
       'unreadCount': unreadCount,
+      'folder': folder,
+      'theme': theme,
     };
   }
 
   Chat copyWith({
+    String? id,
+    List<String>? participants,
+    String? lastMessage,
+    DateTime? lastMessageTime,
+    Map<String, int>? unreadCount,
     String? otherUserName,
     String? otherUserProfilePicture,
+    String? folder,
+    String? theme,
   }) {
     return Chat(
-      id: this.id,
-      participants: this.participants,
-      lastMessage: this.lastMessage,
-      lastMessageTime: this.lastMessageTime,
-      unreadCount: this.unreadCount,
+      id: id ?? this.id,
+      participants: participants ?? this.participants,
+      lastMessage: lastMessage ?? this.lastMessage,
+      lastMessageTime: lastMessageTime ?? this.lastMessageTime,
+      unreadCount: unreadCount ?? this.unreadCount,
       otherUserName: otherUserName ?? this.otherUserName,
       otherUserProfilePicture:
           otherUserProfilePicture ?? this.otherUserProfilePicture,
+      folder: folder ?? this.folder,
+      theme: theme ?? this.theme,
     );
   }
 }

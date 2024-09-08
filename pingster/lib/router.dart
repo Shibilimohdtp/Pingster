@@ -1,11 +1,12 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pingster/screens/auth/splash_screen.dart';
+import 'screens/auth/splash_screen.dart';
 import 'screens/auth/login_screen.dart';
 import 'screens/auth/register_screen.dart';
 import 'screens/auth/forgot_password_screen.dart';
 import 'screens/chat/chat_list_screen.dart';
 import 'screens/chat/chat_screen.dart';
+import 'screens/profile_screen.dart';
+import 'screens/settings_screen.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -37,6 +38,14 @@ class AppRouter {
           final chatId = state.params['id']!;
           return ChatScreen(chatId: chatId);
         },
+      ),
+      GoRoute(
+        path: '/profile',
+        builder: (context, state) => ProfileScreen(),
+      ),
+      GoRoute(
+        path: '/settings',
+        builder: (context, state) => SettingsScreen(),
       ),
     ],
   );

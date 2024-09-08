@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:animate_do/animate_do.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import '../../providers/auth_provider.dart';
 import '../../theme.dart';
 import '../../widgets/custom_widgets.dart';
@@ -75,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     controller: _emailController,
                     label: 'Email',
                     keyboardType: TextInputType.emailAddress,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: PingsterTheme
                             .primary200), // Set the text color here
                     validator: (value) {
@@ -94,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     controller: _passwordController,
                     label: 'Password',
                     obscureText: true,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: PingsterTheme
                             .primary200), // Set the text color here
                     validator: (value) {

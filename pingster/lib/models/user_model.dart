@@ -5,12 +5,14 @@ class UserModel {
   final String username;
   final String fullName;
   final String? profilePicture;
+  final String email;
 
   UserModel({
     required this.id,
     required this.username,
     required this.fullName,
     this.profilePicture,
+    required this.email,
   });
 
   factory UserModel.fromFirestore(DocumentSnapshot doc) {
@@ -20,6 +22,7 @@ class UserModel {
       username: data['username'] ?? '',
       fullName: data['fullName'] ?? '',
       profilePicture: data['profilePicture'],
+      email: data['email'] ?? '',
     );
   }
 }

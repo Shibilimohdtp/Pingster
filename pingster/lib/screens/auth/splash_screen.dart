@@ -32,19 +32,19 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: PingsterTheme.primary200,
+      backgroundColor: Theme.of(context).dialogBackgroundColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Replace this with your app logo
-            Icon(
-              Icons.chat_bubble_outline,
-              size: 100,
-              color: Colors.white,
+            // Custom logo
+            Image.asset(
+              'assets/logo/logo.png',
+              width: 150, // Adjust the size as needed
+              height: 150,
             ),
-            SizedBox(height: 24),
-            CircularProgressIndicator(
+            const SizedBox(height: 24),
+            const CircularProgressIndicator(
               valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
             ),
           ],

@@ -1,26 +1,36 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../services/firebase_service.dart';
+import '../models/user_model.dart';
 
 class AuthProvider extends ChangeNotifier {
   final FirebaseService _firebaseService = FirebaseService();
-  User? _user;
+  UserModel? _user;
 
-  User? get user => _user;
+  UserModel? get user => _user;
 
   AuthProvider() {
     _initializeUser();
   }
 
   Future<void> _initializeUser() async {
-    _user = await _firebaseService.getCurrentUser();
-    notifyListeners();
+    User? firebaseUser = await _firebaseService.getCurrentUser();
+    if (firebaseUser != null) {
+      _user = await _firebaseService.getUserById(firebaseUser.uid);
+      notifyListeners();
+    }
   }
 
   Future<bool> isUserLoggedIn() async {
     if (_user != null) return true;
-    _user = await _firebaseService.getCurrentUser();
-    return _user != null;
+    User? firebaseUser = await _firebaseService.getCurrentUser();
+    if (firebaseUser != null) {
+      _user = await _firebaseService.getUserById(firebaseUser.uid);
+      notifyListeners();
+      return true;
+    }
+    return false;
   }
 
   Future<void> signOut() async {
@@ -34,7 +44,7 @@ class AuthProvider extends ChangeNotifier {
     try {
       UserCredential userCredential = await _firebaseService.signUpWithEmail(
           email, password, username, fullName);
-      _user = userCredential.user;
+      _user = await _firebaseService.getUserById(userCredential.user!.uid);
       notifyListeners();
     } catch (e) {
       rethrow;
@@ -45,8 +55,28 @@ class AuthProvider extends ChangeNotifier {
     try {
       UserCredential userCredential =
           await _firebaseService.signInWithEmail(email, password);
-      _user = userCredential.user;
+      _user = await _firebaseService.getUserById(userCredential.user!.uid);
       notifyListeners();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> updateUserProfile({String? fullName, File? imageFile}) async {
+    try {
+      if (_user != null) {
+        String? profilePictureUrl;
+        if (imageFile != null) {
+          profilePictureUrl =
+              await _firebaseService.uploadProfilePicture(_user!.id, imageFile);
+        }
+        _user = await _firebaseService.updateUserProfile(
+          _user!.id,
+          fullName: fullName,
+          profilePicture: profilePictureUrl,
+        );
+        notifyListeners();
+      }
     } catch (e) {
       rethrow;
     }
