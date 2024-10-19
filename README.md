@@ -1,5 +1,8 @@
 # Pingster Chat App
 
+![Frame 20](https://github.com/user-attachments/assets/8ac0887f-a95e-444e-a376-d42ae78cbd38)
+
+
 Pingster is a secure, feature-rich chat application built with Flutter and Firebase. It offers end-to-end encryption, real-time messaging, and a variety of modern chat features.
 
 ## Features
